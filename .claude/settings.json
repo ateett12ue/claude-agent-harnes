@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(code-review-graph --version)",
+      "Bash(code-review-graph --help)"
+    ]
+  }
+}

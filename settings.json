@@ -1,0 +1,53 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm lint *)",
+      "Bash(grep -E \"^/Users.*\\\\.\\(ts|tsx\\)$\")",
+      "Bash(git commit -m ' *)",
+      "Bash(lsof -i :5173 -sTCP:LISTEN -t)",
+      "Bash(pkill -f \"vite\")",
+      "Bash(sips -h)",
+      "Bash(sips --help)",
+      "Bash(sips --formats)",
+      "Bash(bash -c ' *)",
+      "Bash(zsh -c ' *)",
+      "Bash(npx vite *)",
+      "Bash(npx eslint *)",
+      "Bash(gtimeout 6 npx vite dev --port 5273)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(wait)",
+      "Bash(pkill -f \"vite dev --port 5273\")"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v code-review-graph >/dev/null 2>&1 && git -C \"${CLAUDE_PROJECT_DIR:-$PWD}\" rev-parse --git-dir >/dev/null 2>&1 && code-review-graph update --skip-flows --repo \"${CLAUDE_PROJECT_DIR:-$PWD}\" >/dev/null 2>&1 || true",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "D=\"${CLAUDE_PROJECT_DIR:-$PWD}\"; C=\"$D/CLAUDE.md\"; B=\"$D/.claude-md.bak\"; if grep -q 'claude-modules:managed' \"$C\" 2>/dev/null; then cp \"$C\" \"$B\"; elif [ -f \"$B\" ]; then cp \"$B\" \"$C\" && echo 'CLAUDE.md restored from backup (overwrite detected)'; fi; true",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "command -v code-review-graph >/dev/null 2>&1 && git -C \"${CLAUDE_PROJECT_DIR:-$PWD}\" rev-parse --git-dir >/dev/null 2>&1 && code-review-graph update --repo \"${CLAUDE_PROJECT_DIR:-$PWD}\" >/dev/null 2>&1 && echo 'code-review-graph: graph ready for this session' || echo 'code-review-graph: skipped (tool not installed or not a git repo)'",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  }
+}

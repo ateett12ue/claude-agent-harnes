@@ -20,7 +20,32 @@ I wrote up the whole thing on Medium — the why, the how, and how it all fits t
 
 ## 🚀 Quick start
 
+### One command (recommended)
+
+From the root of any project, run:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ateett12ue/claude-agent-harnes/main/install.sh | bash
+```
+
+That's it. The installer (idempotent — safe to re-run to update):
+
+- copies `agents/`, `commands/`, `skills/` into `.claude/`
+- writes the managed `CLAUDE.md` to the repo root (any existing one is backed up to `CLAUDE.md.orig`)
+- deep-merges `settings.json` + `settings.local.json` into `.claude/` **without** clobbering permissions/hooks you already have
+
+Install into a specific directory: append `| bash -s -- /path/to/project`.
+
+Then restart Claude Code so the `SessionStart` hook runs.
+
+### From inside Claude Code
+
+Drop [`commands/claude-modules.md`](commands/claude-modules.md) into `~/.claude/commands/`
+(once), then run `/claude-modules` in any project to install or update the harness.
+
+### Manual
+
 1. Copy `CLAUDE.md` to your repo root, and `agents/` + `commands/` + `skills/` into `.claude/`.
-2. Merge `settings.json` into your `.claude/settings.json`.
+2. Merge `settings.json` and `settings.local.json` into your `.claude/` versions.
 3. Open Claude Code and start building. (Full setup details are in the article above.)
 ---

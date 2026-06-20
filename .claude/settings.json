@@ -3,7 +3,23 @@
     "allow": [
       "WebFetch(domain:github.com)",
       "Bash(code-review-graph --version)",
-      "Bash(code-review-graph --help)"
+      "Bash(code-review-graph --help)",
+      "Bash(command -v jq)",
+      "Bash(jq --version)",
+      "Bash(curl -fsSL \"https://codeload.github.com/ateett12ue/claude-agent-harnes/tar.gz/refs/heads/main\" -o /tmp/cm.tgz)",
+      "Bash(tar -tzf /tmp/cm.tgz)",
+      "Read(//Users/ateettiwari/.claude/**)",
+      "Bash(chmod +x install.sh)",
+      "Bash(bash -n install.sh)",
+      "Read(//private/tmp/cm-test/.claude/**)",
+      "Read(//private/tmp/cm-test/**)",
+      "Bash(bash '/Users/ateettiwari/Desktop/Self projects/Claude Modules/install.sh' /tmp/cm-test)",
+      "Bash(mkdir -p ~/.claude/commands && echo \"created ~/.claude/commands\")",
+      "Bash(cp ~/.claude/commands/claude-modules.md \"/Users/ateettiwari/Desktop/Self projects/Claude Modules/commands/claude-modules.md\" && echo \"copied to repo commands/\" && ls -la \"/Users/ateettiwari/Desktop/Self projects/Claude Modules/commands/claude-modules.md\")"
+    ],
+    "additionalDirectories": [
+      "/Users/ateettiwari/.claude",
+      "/Users/ateettiwari/.claude/commands"
     ]
   }
 }
